@@ -1717,36 +1717,3 @@ body {
 *{ -webkit-touch-callout:none !important; -webkit-user-select:none !important; user-select:none !important; -webkit-tap-highlight-color:transparent !important; }
 input, textarea { -webkit-user-select:text !important; user-select:text !important; }
 
-/* ========= HAMBURGER TO X ANIMATION ========= */
-.hamburger {
-    width: 25px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.hamburger span {
-    display: block;
-    height: 3px;
-    width: 100%;
-    background: #000000;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-/* When menu is open - turn into X */
-.nav-menu.active ~ .nav-toggle .hamburger span:nth-child(1) {
-    transform: translateY(8.5px) rotate(45deg);
-}
-
-.nav-menu.active ~ .nav-toggle .hamburger span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-
-.nav-menu.active ~ .nav-toggle .hamburger span:nth-child(3) {
-    transform: translateY(-8.5px) rotate(-45deg);
-}
