@@ -1,199 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>IMPOSTER · Bluff & Deduction</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SCRABBLE · Word Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navigation Menu -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <i class="fas fa-mask"></i>
-        <span>IMPOSTER</span>
-      </div>
-      <div class="nav-menu" id="navMenu">
-        <button class="nav-link active" data-page="home">
-          <i class="fas fa-home"></i>
-          <span>Home</span>
-        </button>
-        <button class="nav-link" data-page="howto">
-          <i class="fas fa-question-circle"></i>
-          <span>How to Play</span>
-        </button>
-        <button class="nav-link" data-page="support">
-          <i class="fas fa-heart"></i>
-          <span>Support</span>
-        </button>
-      </div>
-      <div class="nav-toggle" id="navToggle">
-        <i class="fas fa-bars"></i>
-      </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" id="homeMenuBtn">
+                <i class="fas fa-font"></i>
+                <span>SCRABBLE</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <button class="nav-link active" data-page="game">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Game</span>
+                </button>
+                <button class="nav-link" data-page="howto">
+                    <i class="fas fa-question-circle"></i>
+                    <span>How to Play</span>
+                </button>
+                <button class="nav-link" data-page="support">
+                    <i class="fas fa-heart"></i>
+                    <span>Support</span>
+                </button>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div id="gamePage" class="page active">
+        <div class="game-container">
+            <div class="score-board" id="scoreBoard"></div>
+
+            <div class="game-info">
+                <div class="turn-indicator">
+                    <i class="fas fa-user"></i>
+                    <span id="turnText">Player 1's Turn</span>
+                </div>
+                <div class="timer-display" id="timerDisplay">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span id="timerText">03:00</span>
+                </div>
+                <div class="tiles-left">
+                    <i class="fas fa-cube"></i>
+                    <span id="tilesLeft">Tiles Left: 100</span>
+                </div>
+            </div>
+
+            
+
+            <div class="board-container">
+                <div class="board" id="board"></div>
+            </div>
+
+            <div class="letter-rack" id="letterRack"></div>
+
+            <div class="selected-word">
+                <span>Word:</span>
+                <span id="selectedWordDisplay">-</span>
+                <span id="wordScoreDisplay">(0 pts)</span>
+            </div>
+
+            <div class="game-controls">
+                <button id="submitWordBtn" class="btn-control btn-primary">
+                    <i class="fas fa-check"></i> Submit Word
+                </button>
+                <button id="clearWordBtn" class="btn-control btn-reset">
+                    <i class="fas fa-trash-alt"></i> Clear
+                </button>
+                <button id="skipTurnBtn" class="btn-control btn-skip">
+                    <i class="fas fa-forward"></i> Skip Turn
+                </button>
+                <button id="finishGameBtn" class="btn-control btn-finish" style="display:none;">
+                    <i class="fas fa-flag-checkered"></i> Finish Game
+                </button>
+            </div>
+        </div>
     </div>
-  </nav>
 
-  <!-- Page: Home -->
-  <div id="homePage" class="page active">
-    <div class="container">
-      <div class="header">
-        <div class="logo-icon">
-          <i class="fas fa-mask"></i>
+    <!-- How to Play Page -->
+    <div id="howtoPage" class="page">
+        <div class="container howto-container">
+            <div class="howto-header">
+                <i class="fas fa-question-circle"></i>
+                <h1>How to Play</h1>
+                <p>build words, earn points, become the champion</p>
+            </div>
+            <div class="howto-grid">
+                <div class="howto-card">
+                    <div class="howto-number">01</div>
+                    <i class="fas fa-users"></i>
+                    <h3>Gather Players</h3>
+                    <p>2-4 players take turns building words on the 15x15 board.</p>
+                </div>
+                <div class="howto-card">
+                    <div class="howto-number">02</div>
+                    <i class="fas fa-cog"></i>
+                    <h3>Setup the Game</h3>
+                    <p>Enter player names, select number of players (2-4), and start the game.</p>
+                </div>
+                <div class="howto-card">
+                    <div class="howto-number">03</div>
+                    <i class="fas fa-border-all"></i>
+                    <h3>The Board</h3>
+                    <p>The board has premium squares: DL (Double Letter), TL (Triple Letter), DW (Double Word), TW (Triple Word).</p>
+                </div>
+                <div class="howto-card">
+                    <div class="howto-number">04</div>
+                    <i class="fas fa-arrows-alt"></i>
+                    <h3>Place Tiles</h3>
+                    <p>Select a letter from your rack, then click a board cell. Choose Horizontal or Vertical direction.</p>
+                </div>
+                <div class="howto-card">
+                    <div class="howto-number">05</div>
+                    <i class="fas fa-calculator"></i>
+                    <h3>Score Points</h3>
+                    <p>Each letter has points. Premium squares multiply your score. Submit your word to earn points!</p>
+                </div>
+                <div class="howto-card">
+                    <div class="howto-number">06</div>
+                    <i class="fas fa-trophy"></i>
+                    <h3>Win the Game</h3>
+                    <p>The game ends when no tiles remain. The player with the highest score wins!</p>
+                </div>
+            </div>
         </div>
-        <h1 class="title">IMPOSTER</h1>
-        <p class="subtitle">one secret word. one liar. find the fake.</p>
-      </div>
-
-      <div class="categories-section">
-        <div class="section-header">
-          <h2>choose category</h2>
-          <div class="section-line"></div>
-        </div>
-        
-        <div class="categories-grid" id="categoriesGrid">
-          <!-- Categories will be dynamically generated -->
-        </div>
-      </div>
-
-      <div class="play-section">
-        <button class="btn-play" id="playBtn">
-          <span>play game</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-        <p class="play-hint">select a category to begin</p>
-      </div>
     </div>
-  </div>
 
-  <!-- Page: How to Play -->
-  <div id="howtoPage" class="page">
-    <div class="container howto-container">
-      <div class="howto-header">
-        <i class="fas fa-question-circle"></i>
-        <h1>How to Play</h1>
-        <p>master the art of deception</p>
-      </div>
-      <div class="howto-grid">
-        <div class="howto-card"><div class="howto-number">01</div><i class="fas fa-users"></i><h3>Gather Players</h3><p>Get 3-100 players around one device. One will be the imposter.</p></div>
-        <div class="howto-card"><div class="howto-number">02</div><i class="fas fa-folder-open"></i><h3>Pick a Category</h3><p>Choose from 12 exciting categories!</p></div>
-        <div class="howto-card"><div class="howto-number">03</div><i class="fas fa-id-card"></i><h3>Reveal Your Role</h3><p>Tap and hold your card. Most see the secret word. The imposter sees a hint.</p></div>
-        <div class="howto-card"><div class="howto-number">04</div><i class="fas fa-comments"></i><h3>Discuss & Bluff</h3><p>The imposter must fake knowing the word. Others try to spot the liar.</p></div>
-        <div class="howto-card"><div class="howto-number">05</div><i class="fas fa-gavel"></i><h3>Vote</h3><p>Each player votes once for who they think is the imposter.</p></div>
-        <div class="howto-card"><div class="howto-number">06</div><i class="fas fa-trophy"></i><h3>Reveal & Win</h3><p>See if you caught the imposter or if they fooled everyone!</p></div>
-      </div>
+    <div id="supportPage" class="page">
+        <div class="container support-container">
+            <div class="support-header">
+                <i class="fas fa-heart"></i>
+                <h1>Support</h1>
+                <p>follow & share the fun</p>
+            </div>
+            <div class="social-links">
+                <a href="https://instagram.com/_arsu.x" target="_blank" class="social-card">
+                    <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                    <div class="social-info"><h3>Instagram</h3><span>@_arsu.x</span></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="https://tiktok.com/@my.ville" target="_blank" class="social-card">
+                    <div class="social-icon"><i class="fab fa-tiktok"></i></div>
+                    <div class="social-info"><h3>TikTok</h3><span>@my.ville</span></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="https://github.com/Arfadh-Subhan" target="_blank" class="social-card">
+                    <div class="social-icon"><i class="fab fa-github"></i></div>
+                    <div class="social-info"><h3>GitHub</h3><span>Arfadh-Subhan</span></div>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="support-footer">
+                <p>❤️ Love this game? Share it with friends!</p>
+                <div class="share-buttons">
+                    <button class="share-btn" id="shareTwitter"><i class="fab fa-twitter"></i></button>
+                    <button class="share-btn" id="shareWhatsapp"><i class="fab fa-whatsapp"></i></button>
+                    <button class="share-btn" id="shareTelegram"><i class="fab fa-telegram"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Page: Support -->
-  <div id="supportPage" class="page">
-    <div class="container support-container">
-      <div class="support-header">
-        <i class="fas fa-heart"></i>
-        <h1>Support</h1>
-        <p>follow & share the deception</p>
-      </div>
-      <div class="social-links">
-        <a href="https://instagram.com/_arsu.x" target="_blank" class="social-card" id="instaLink">
-          <div class="social-icon"><i class="fab fa-instagram"></i></div>
-          <div class="social-info"><h3>Instagram</h3><span>@_arsu.x</span></div>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="https://tiktok.com/@my.ville" target="_blank" class="social-card" id="tiktokLink">
-          <div class="social-icon"><i class="fab fa-tiktok"></i></div>
-          <div class="social-info"><h3>TikTok</h3><span>@my.ville</span></div>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="https://github.com/Arfadh-Subhan" target="_blank" class="social-card" id="githubLink">
-          <div class="social-icon"><i class="fab fa-github"></i></div>
-          <div class="social-info"><h3>GitHub</h3><span>Arfadh-Subhan</span></div>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-      <div class="support-footer">
-        <p>❤️ Love this game? Share it with friends!</p>
-        <div class="share-buttons">
-          <button class="share-btn" id="shareTwitter"><i class="fab fa-twitter"></i></button>
-          <button class="share-btn" id="shareWhatsapp"><i class="fab fa-whatsapp"></i></button>
-          <button class="share-btn" id="shareTelegram"><i class="fab fa-telegram"></i></button>
+    <div id="setupModal" class="modal-overlay">
+        <div class="modal-card setup-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> Game Setup</h3>
+            </div>
+            <div class="modal-body">
+                <div class="setup-players" id="setupPlayers"></div>
+                <div class="setup-option">
+                    <label><i class="fas fa-users"></i> Number of Players</label>
+                    <div class="player-count-buttons">
+                        <button class="player-count-btn" data-count="2">2 Players</button>
+                        <button class="player-count-btn" data-count="3">3 Players</button>
+                        <button class="player-count-btn" data-count="4">4 Players</button>
+                    </div>
+                </div>
+                <button id="startGameBtn" class="btn-start-game">
+                    <i class="fas fa-play"></i> Start Game
+                </button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Player Setup Modal -->
-  <div id="setupModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3><i class="fas fa-users"></i> Player Setup</h3>
-        <button class="modal-close" id="closeModalBtn">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="player-count-info"><span><i class="fas fa-user-friends"></i> Players: <strong id="playerCountDisplay">3</strong> / 100</span></div>
-        <div class="player-names-panel" id="playerNamesPanel"></div>
-        <div class="modal-actions">
-          <button id="addPlayerBtn" class="btn-secondary-modal"><i class="fas fa-plus"></i> Add Player</button>
-          <button id="startGameModalBtn" class="btn-primary-modal"><i class="fas fa-play"></i> Start Game</button>
+    <div id="nameEditorModal" class="modal-overlay">
+        <div class="modal-card name-editor-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-pencil-alt"></i> Edit Player Name</h3>
+                <button class="modal-close" id="closeNameEditorBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="name-editor-input">
+                    <label id="nameEditorLabel">Player Name</label>
+                    <input type="text" id="nameEditorInput" maxlength="20" placeholder="Enter name">
+                </div>
+                <div class="name-editor-actions">
+                    <button id="saveNameBtn" class="btn-save"><i class="fas fa-check"></i> Save</button>
+                    <button id="cancelNameBtn" class="btn-cancel"><i class="fas fa-times"></i> Cancel</button>
+                </div>
+            </div>
         </div>
-        <p class="modal-note"><i class="fas fa-info-circle"></i> Player names are saved automatically</p>
-      </div>
     </div>
-  </div>
 
-  <!-- GAME MODAL (Flip Cards + Voting) -->
-  <div id="gameModal" class="modal-overlay">
-    <div class="game-modal-card">
-      <!-- Phase 1: Flip Card Reveal -->
-      <div id="revealPhase" class="game-phase active">
-        <div class="game-modal-header">
-          <button id="closeGameBtn" class="game-exit-btn"><i class="fas fa-times"></i></button>
-          <div class="reveal-progress">Player <span id="currentRevealIdx">1</span> / <span id="totalRevealPlayers">0</span></div>
+    <!-- Blank Tile Letter Selection Modal -->
+    <div id="blankTileModal" class="modal-overlay">
+        <div class="modal-card blank-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-font"></i> Choose Letter for Blank Tile</h3>
+            </div>
+            <div class="modal-body">
+                <div class="blank-letter-selector" id="blankLetterSelector"></div>
+                <button id="confirmBlankLetterBtn" class="btn-start-game">Confirm</button>
+            </div>
         </div>
-        <div class="flip-card-container" id="flipCardContainer"></div>
-        <div class="reveal-footer">
-          <button id="nextPlayerRevealBtn" class="btn-game-secondary" disabled><i class="fas fa-arrow-right"></i> Next Player</button>
-          <button id="finishRevealBtn" class="btn-game-primary" disabled><i class="fas fa-gavel"></i> Start Voting</button>
-        </div>
-      </div>
-
-      <!-- Phase 2: Voting -->
-      <div id="votingPhase" class="game-phase">
-        <div class="game-modal-header">
-          <h3><i class="fas fa-gavel"></i> Vote the Imposter</h3>
-          <button id="closeVotingBtn" class="game-exit-btn"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="voting-list" id="votingList"></div>
-        <div class="voting-footer">
-          <button id="revealVerdictBtn" class="btn-game-danger"><i class="fas fa-skull"></i> Reveal Imposter</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Result Modal -->
-  <div id="resultModal" class="modal-overlay">
-    <div class="result-card">
-      <div class="result-header" id="resultHeader">
-        <i class="fas fa-trophy"></i>
-        <h2 id="resultTitle">IMPOSTER CAUGHT!</h2>
-      </div>
-      <div class="result-body" id="resultBody"></div>
-      <div class="result-buttons">
-        <button id="playAgainBtn" class="btn-play-again"><i class="fas fa-redo-alt"></i> Play Again</button>
-        <button id="endGameBtn" class="btn-end-game"><i class="fas fa-home"></i> End Game</button>
-      </div>
+    <!-- Turn Modal -->
+    <div id="turnModal" class="modal-overlay turn-modal">
+        <div class="turn-card">
+            <i class="fas fa-user-circle"></i>
+            <h2 id="turnModalText">Player 1's Turn</h2>
+            <button id="closeTurnModalBtn" class="btn-turn-ok">OK</button>
+        </div>
     </div>
-  </div>
 
-  <!-- Floating Play Button -->
-<button id="floatingPlayBtn" class="floating-play-btn">
-    <i class="fas fa-play"></i>
-</button>
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal-overlay">
+        <div class="result-card">
+            <div class="result-header" id="resultHeader">
+                <i class="fas fa-trophy"></i>
+                <h2 id="resultTitle">GAME OVER!</h2>
+            </div>
+            <div class="result-body" id="resultBody"></div>
+            <div class="result-buttons">
+                <button id="playAgainBtn" class="btn-winner">Play Again</button>
+            </div>
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
