@@ -1183,3 +1183,39 @@ input, textarea, [contenteditable="true"] {
     -webkit-user-select: text !important;
     user-select: text !important;
 }
+
+/* ========= SMOOTH MOBILE MENU ANIMATION ========= */
+.nav-menu {
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Animate menu items when opening */
+.nav-menu.active .nav-link {
+    animation: menuSlideIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+/* Stagger the animations */
+.nav-menu.active .nav-link:nth-child(1) { animation-delay: 0.05s; }
+.nav-menu.active .nav-link:nth-child(2) { animation-delay: 0.1s; }
+.nav-menu.active .nav-link:nth-child(3) { animation-delay: 0.15s; }
+
+@keyframes menuSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hamburger icon rotation */
+.nav-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.nav-menu.active ~ .nav-toggle i {
+    transform: rotate(90deg);
+}
