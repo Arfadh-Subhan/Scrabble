@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
-    const pages = { game: document.getElementById('gamePage'), support: document.getElementById('supportPage') };
+    const pages = { game: document.getElementById('gamePage'), howto: document.getElementById('howtoPage'), support: document.getElementById('supportPage') };
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
