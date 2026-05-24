@@ -1148,8 +1148,8 @@ body {
     }
 }
 
-/* ========= DISABLE TEXT SELECTION ON ENTIRE WEB APP ========= */
-* {
+/* ========= DISABLE TEXT SELECTION - STRONG VERSION ========= */
+html, body, div, span, button, p, h1, h2, h3, h4, .cell, .tile, .board, .letter-rack, .player-card, .score-board, .game-container, .modal-card, .result-card, .winner-card, .turn-card {
     -webkit-touch-callout: none !important;
     -webkit-user-select: none !important;
     -khtml-user-select: none !important;
@@ -1159,5 +1159,27 @@ body {
     -webkit-tap-highlight-color: transparent !important;
 }
 
-*{ -webkit-touch-callout:none !important; -webkit-user-select:none !important; user-select:none !important; -webkit-tap-highlight-color:transparent !important; }
-input, textarea { -webkit-user-select:text !important; user-select:text !important; }
+/* Specifically target Scrabble board cells */
+.cell, .tile {
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    pointer-events: auto;
+}
+
+/* Allow text selection ONLY in input fields */
+input, textarea, [contenteditable="true"] {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Also prevent selection on any text inside game elements */
+.game-container * {
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Except inputs */
+.game-container input {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+}
